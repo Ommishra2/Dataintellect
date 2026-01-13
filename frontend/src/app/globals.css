@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    /* ShadCN Colors (Keep these for compatibility with Table/Select) */
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+
+    /* Vercel Design System Colors (New) */
+    --ds-background-100: #ffffff;
+    --ds-background-200: #fafafa;
+    --ds-gray-100: #f5f5f5;
+    --ds-gray-200: #e5e5e5;
+    --ds-gray-300: #d4d4d4;
+    --ds-gray-400: #a3a3a3;
+    --ds-gray-500: #737373;
+    --ds-gray-600: #525252;
+    --ds-gray-700: #404040;
+    --ds-gray-800: #262626;
+    --ds-gray-900: #737373;
+    --ds-gray-1000: #0a0a0a;
+    --ds-gray-alpha-100: rgba(0, 0, 0, 0.05);
+    --ds-gray-alpha-200: rgba(0, 0, 0, 0.1);
+    --ds-gray-alpha-400: rgba(0, 0, 0, 0.2);
+    --ds-gray-alpha-600: rgba(0, 0, 0, 0.4);
+
+    --ds-blue-500: #3b82f6;
+    --ds-blue-600: #2563eb;
+    --ds-blue-700: #1d4ed8;
+    --ds-blue-800: #1e40af;
+    --ds-blue-900: #0066ff;
+
+    --ds-red-600: #dc2626;
+    --ds-red-700: #b91c1c;
+    --ds-red-800: #991b1b;
+    --ds-red-900: #dc143c;
+
+    --ds-green-600: #16a34a;
+    --ds-green-700: #15803d;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
+    /* Vercel Dark Mode Overrides */
+    --ds-background-100: #000000;
+    --ds-background-200: #171717;
+    --ds-gray-100: #262626;
+    --ds-gray-200: #333333;
+    --ds-gray-300: #404040;
+    --ds-gray-400: #525252;
+    --ds-gray-500: #737373;
+    --ds-gray-600: #a3a3a3;
+    --ds-gray-700: #d4d4d4;
+    --ds-gray-800: #e5e5e5;
+    --ds-gray-900: #a1a1aa;
+    --ds-gray-1000: #fafafa;
+    --ds-gray-alpha-100: rgba(255, 255, 255, 0.05);
+    --ds-gray-alpha-200: rgba(255, 255, 255, 0.1);
+    --ds-gray-alpha-400: rgba(255, 255, 255, 0.2);
+    --ds-gray-alpha-600: rgba(255, 255, 255, 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Vercel Utilities */
+.bg-gray-alpha-100 {
+  background-color: var(--ds-gray-alpha-100);
+}
+
+.text-gray-900 {
+  color: var(--ds-gray-900);
+}
+
+.text-gray-1000 {
+  color: var(--ds-gray-1000);
+}
