@@ -1,0 +1,4 @@
+account_id,date,revenue,expense,balance,transaction_count,overdue_amount,payment_delay_days
+ACC-101,2023-01-01,5000.00,2000.00,3000.00,15,0.00,0
+ACC-101,2023-02-01,5200.00,2100.00,3100.00,18,50.00,2
+ACC-102,2023-01-15,1000.00,1200.00,-200.00,5,300.00,15
