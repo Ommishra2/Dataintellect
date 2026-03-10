@@ -1,155 +1,150 @@
-# DataIntellect - Environment Setup Guide
+# DataIntellect — Development Setup Guide
 
-This document provides step-by-step instructions to set up the development environment for the **DataIntellect** project.
+AI-Enabled Financial Risk Intelligence Platform.
 
-## 1. Prerequisites (Check & Install)
+---
 
-Open your terminal (PowerShell or Command Prompt) and ensure the following tools are installed. If not, download and install them.
+## 1. Prerequisites
 
-- **VS Code**: [Download](https://code.visualstudio.com/download)
-- **Git**: [Download](https://git-scm.com/downloads)
-    ```powershell
-    git --version
-    ```
-- **Python (3.10+)**: [Download](https://www.python.org/downloads/)
-    ```powershell
-    python --version
-    ```
-- **Node.js (LTS Version)**: [Download](https://nodejs.org/en)
-    ```powershell
-    node --version
-    npm --version
-    ```
-- **PostgreSQL**: [Download](https://www.postgresql.org/download/)
-    - Remember your password (default is usually `postgres`).
-    ```powershell
-    psql --version
-    ```
+Ensure the following are installed before proceeding.
 
-## 2. VS Code Extensions
+| Tool | Min Version | Download |
+| :--- | :--- | :--- |
+| **Git** | Any | [git-scm.com](https://git-scm.com/downloads) |
+| **Python** | 3.10+ | [python.org](https://www.python.org/downloads/) |
+| **Node.js** | LTS (20.x) | [nodejs.org](https://nodejs.org/en) |
+| **PostgreSQL** | 14+ | [postgresql.org](https://www.postgresql.org/download/) |
 
-Install the following extensions in VS Code for a better development experience:
-- **Python** (Microsoft)
-- **Pylance** (Microsoft)
-- **ES7+ React/Redux/React-Native snippets**
-- **Tailwind CSS IntelliSense**
-- **PostgreSQL** (by Chris Kolkman or similar)
-
-## 3. Project Initialization
-
-### 3.1. Clone / Open Repository
-Ensure you are in the project root:
-`c:\Users\ommis\OneDrive\Documents\DataIntellect project\dataintellect`
-
-### 3.2. Backend Setup (Python)
-
-1.  **Navigate to backend directory**:
-    ```powershell
-    cd backend
-    ```
-
-2.  **Create Virtual Environment**:
-    ```powershell
-    python -m venv venv
-    ```
-
-3.  **Activate Virtual Environment**:
-    ```powershell
-    .\venv\Scripts\Activate
-    ```
-    *(You should see `(venv)` in your terminal prompt)*
-
-4.  **Install Dependencies** (Create `requirements.txt` first if not exists, then run):
-    ```powershell
-    pip install fastapi uvicorn pandas sqlalchemy psycopg2-binary python-multipart
-    ```
-
-    *Create a file named `requirements.txt` in `backend/` with contents:*
-    ```text
-    fastapi
-    uvicorn
-    pandas
-    sqlalchemy
-    psycopg2-binary
-    python-multipart
-    ```
-    Then run: `pip install -r requirements.txt`
-
-### 3.3. Frontend Setup (Next.js)
-
-1.  **Navigate to frontend directory** (Open a new terminal):
-    ```powershell
-    cd ../frontend
-    ```
-
-2.  **Initialize Next.js Project**:
-    ```powershell
-    npx create-next-app@latest . --typescript --tailwind --eslint
-    ```
-    *Prompts:*
-    - Use TypeScript? **Yes**
-    - Use ESLint? **Yes**
-    - Use Tailwind CSS? **Yes**
-    - Use `src/` directory? **Yes** (or No, consistent with preference)
-    - Use App Router? **Yes**
-    - Customize default import alias? **No**
-
-3.  **Install Additional UI Libraries**:
-    ```powershell
-    npm install lucide-react recharts three @types/three framer-motion clsx tailwind-merge
-    ```
-
-### 3.4. Database Setup (PostgreSQL)
-
-1.  **Open PostgreSQL Shell (psql)** or pgAdmin.
-2.  **Create Database**:
-    ```sql
-    CREATE DATABASE dataintellect;
-    ```
-3.  **Verify Connection**:
-    - Host: localhost
-    - Port: 5432
-    - User: postgres
-    - Password: [YOUR_PASSWORD]
-    - Database: dataintellect
-
-## Quick Start Commands (Daily Development)
-
-Use these commands to start the project. Run them in separate terminal instances.
-
-### 1. Start Backend (Python/FastAPI)
-Using the correct virtual environment path is crucial.
-**Directory**: `dataintellect/backend`
-
+Verify installations:
 ```powershell
-& "venv\Scripts\python.exe" -m uvicorn app.main:app --reload
-Ctrl+C to exit.
-
-```
-*   **Port**: `http://127.0.0.1:8000`
-*   **Docs**: `http://127.0.0.1:8000/docs`
-
-### 2. Start Frontend (Next.js)
-**Directory**: `dataintellect/frontend`
-
-```powershell
-npm run dev
-```
-*   **URL**: `http://localhost:3000`
-
-### 3. Run Tests
-**Directory**: `dataintellect/backend`
-
-```powershell
-& "venv\Scripts\python.exe" run_tests.py
-```
-
-### 4. Database Reset (Warning: Deletes Data)
-**Directory**: `dataintellect/backend`
-
-```powershell
-& "venv\Scripts\python.exe" fix_schema.py
+git --version
+python --version
+node --version && npm --version
+psql --version
 ```
 
 ---
-**Status**: Phase 1 (Minor Project) Fully Implemented & Secure.
+
+## 2. Recommended VS Code Extensions
+
+- **Python** + **Pylance** (Microsoft)
+- **Tailwind CSS IntelliSense**
+- **ES7+ React/Redux/React-Native Snippets**
+- **PostgreSQL** (Chris Kolkman)
+
+---
+
+## 3. Project Setup
+
+### 3.1. Backend (FastAPI + Python)
+
+```powershell
+cd backend
+python -m venv venv
+.\venv\Scripts\Activate
+pip install -r requirements.txt
+```
+
+**`backend/requirements.txt`** must include:
+```text
+fastapi
+uvicorn
+pandas
+sqlalchemy
+psycopg2-binary
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
+```
+
+### 3.2. Frontend (Vite + React)
+
+> ⚠️ The frontend has been migrated from Next.js to **Vite + React SPA** for long-term stability.
+
+```powershell
+cd frontend
+npm install
+```
+
+**Tech Stack:**
+- **Vite 6** — Fast, stable build tool
+- **React 18** + **TypeScript**
+- **React Router v7** — Client-side routing
+- **Tailwind CSS v3** — Styling (via PostCSS)
+- **Radix UI** — Accessible UI primitives
+- **Recharts** — Data visualization
+- **Framer Motion** — Animations
+
+### 3.3. Database (PostgreSQL)
+
+```sql
+CREATE DATABASE dataintellect;
+```
+
+**Connection details:**
+- Host: `localhost` | Port: `5432`
+- User: `postgres`
+- Database: `dataintellect`
+
+---
+
+## 4. Daily Development (Quick Start)
+
+Run in **separate terminals**, in this order:
+
+### Terminal 1 — Backend
+```powershell
+# From: dataintellect/backend
+& "venv\Scripts\python.exe" -m uvicorn app.main:app --reload
+```
+- API: `http://127.0.0.1:8000`
+- Swagger Docs: `http://127.0.0.1:8000/docs`
+
+### Terminal 2 — Frontend
+```powershell
+# From: dataintellect/frontend
+npm run dev
+```
+- App: `http://localhost:5173`
+
+---
+
+## 5. Useful Commands
+
+| Task | Command | Directory |
+| :--- | :--- | :--- |
+| Run backend tests | `& "venv\Scripts\python.exe" run_tests.py` | `backend/` |
+| Reset DB schema | `& "venv\Scripts\python.exe" fix_schema.py` | `backend/` |
+| Build frontend | `npm run build` | `frontend/` |
+| Type-check frontend | `npx tsc --noEmit` | `frontend/` |
+
+---
+
+## 6. Project Structure
+
+```
+dataintellect/
+├── backend/            # FastAPI + SQLAlchemy
+│   └── app/
+│       ├── main.py
+│       ├── models.py
+│       ├── schemas.py
+│       ├── auth.py
+│       └── routers/
+│           ├── auth.py
+│           └── upload.py
+├── frontend/           # Vite + React SPA (active)
+│   └── src/
+│       ├── App.tsx         # Router + layout
+│       ├── pages/          # Page components
+│       ├── components/     # Reusable UI
+│       └── hooks/          # Custom hooks
+├── frontend-nextjs-backup/ # Original Next.js (archived)
+├── ml/                 # ML models
+├── rag/                # RAG pipeline (future)
+└── data-engineering/   # Data pipeline scripts
+```
+
+---
+
+**Status**: Phase 1 (Minor Project) — Frontend migrated to Vite React. Core features in progress.

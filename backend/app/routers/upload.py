@@ -1,7 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, Depends
 from sqlalchemy.orm import Session
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timezone
 from app.database import SessionLocal
 from app.models import FinancialRecord, FinancialAggregate
 from app.auth import get_current_user
@@ -56,7 +56,7 @@ async def upload_financial_data(
                 transaction_count=int(row["transaction_count"]),
                 overdue_amount=float(row["overdue_amount"]),
                 payment_delay_days=int(row["payment_delay_days"]),
-                created_at=datetime.utcnow()
+                created_at=datetime.now(timezone.utc)
             )
         )
 
@@ -88,7 +88,7 @@ async def upload_financial_data(
                 profit=float(row['profit']),
                 expense_ratio=float(row['expense_ratio']),
                 cashflow_volatility=float(row['cashflow_volatility']),
-                created_at=datetime.utcnow()
+                created_at=datetime.now(timezone.utc)
             )
         )
     

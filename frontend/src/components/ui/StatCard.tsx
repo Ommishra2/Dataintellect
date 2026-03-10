@@ -3,12 +3,10 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-function useAnimatedNumber(baseValue: number, startAnimation: boolean) {
+function useAnimatedNumber(baseValue: number) {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    if (!startAnimation) return;
-    
     const end = baseValue;
     // Animation duration in ms
     const duration = 1500;
@@ -29,7 +27,7 @@ function useAnimatedNumber(baseValue: number, startAnimation: boolean) {
     };
 
     requestAnimationFrame(animate);
-  }, [baseValue, startAnimation]);
+  }, [baseValue]);
 
   return value;
 }
@@ -125,7 +123,7 @@ function PixelGridTransition({
       </motion.div>
 
       <motion.div
-        className="absolute inset-0 w-full h-full z-[2] overflow-hidden"
+        className="absolute inset-0 w-full h-full z-2 overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: isActive ? 1 : 0 }}
         transition={{ duration: 0, delay: animationStepDuration }}
@@ -136,7 +134,7 @@ function PixelGridTransition({
       </motion.div>
 
       <div
-        className="absolute inset-0 w-full h-full pointer-events-none z-[3]"
+        className="absolute inset-0 w-full h-full pointer-events-none z-3"
         style={{
           display: "grid",
           gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
@@ -188,7 +186,7 @@ export function StatCard({
 }) {
   const [showInfo, setShowInfo] = useState(false);
   const numericValue = typeof value === 'number' ? value : 0;
-  const animatedValue = useAnimatedNumber(numericValue, true);
+  const animatedValue = useAnimatedNumber(numericValue);
   
   const displayValue = typeof value === 'number' 
     ? animatedValue.toLocaleString() 
@@ -201,7 +199,7 @@ export function StatCard({
           {title}
         </h2>
         {value !== undefined && (
-          <div className="text-3xl md:text-4xl tracking-normal font-mono tabular-nums text-foreground">
+          <div className="text-2xl lg:text-3xl tracking-normal font-mono tabular-nums text-foreground truncate">
             {prefix}{displayValue}{suffix}
           </div>
         )}
@@ -232,7 +230,7 @@ export function StatCard({
         className="h-full"
       />
       {infoContent && (
-        <div className={`absolute top-2 right-2 transition-opacity duration-150 z-[20] isolate ${showInfo ? "opacity-100" : "opacity-100 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"}`}>
+        <div className={`absolute top-2 right-2 transition-opacity duration-150 z-20 isolate ${showInfo ? "opacity-100" : "opacity-100 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"}`}>
           <button
             aria-label={`Learn more about ${title}`}
             type="button"
