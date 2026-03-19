@@ -1,14 +1,150 @@
-# AI-Enabled Financial Risk Intelligence Platform.
+# DataIntellect — Development Setup Guide
 
-### Project Framing
+AI-Enabled Financial Risk Intelligence Platform.
 
-**Minor Project:** Web-Based Data Analytics Platform Using Full Stack Technologies.
-This project focuses on creating a user-friendly web platform for data analytics, which utilizes technologies from both front-end and back-end development, enabling users to easily process and visualize data.
+---
 
-**Major Project:** AI-Enabled Data Intelligence Platform Using Machine Learning and RAG.
-This project involves developing an advanced data intelligence platform that leverages machine learning algorithms and Retrieval-Augmented Generation (RAG) techniques to provide deeper insights and enhance decision-making. It aims to showcase the capabilities of AI in real-world applications, making it relevant for academic, professional, and industry contexts.
+## 1. Prerequisites
 
-### Audience
-- **Professors:** This framing helps in assessing student capabilities in both minor and major projects, highlighting the different skill sets developed through each.
-- **Recruiters:** Understanding this distinction aids recruiters in targeting the right candidates based on their project experience, especially in the tech and analytics domains.
-- **Interviewers:** This information serves as a basis during interviews, allowing interviewers to inquire specifically about the projects the candidates have worked on, thereby gauging their hands-on experience related to important technologies and methods.
+Ensure the following are installed before proceeding.
+
+| Tool | Min Version | Download |
+| :--- | :--- | :--- |
+| **Git** | Any | [git-scm.com](https://git-scm.com/downloads) |
+| **Python** | 3.10+ | [python.org](https://www.python.org/downloads/) |
+| **Node.js** | LTS (20.x) | [nodejs.org](https://nodejs.org/en) |
+| **PostgreSQL** | 14+ | [postgresql.org](https://www.postgresql.org/download/) |
+
+Verify installations:
+```powershell
+git --version
+python --version
+node --version && npm --version
+psql --version
+```
+
+---
+
+## 2. Recommended VS Code Extensions
+
+- **Python** + **Pylance** (Microsoft)
+- **Tailwind CSS IntelliSense**
+- **ES7+ React/Redux/React-Native Snippets**
+- **PostgreSQL** (Chris Kolkman)
+
+---
+
+## 3. Project Setup
+
+### 3.1. Backend (FastAPI + Python)
+
+```powershell
+cd backend
+python -m venv venv
+.\venv\Scripts\Activate
+pip install -r requirements.txt
+```
+
+**`backend/requirements.txt`** must include:
+```text
+fastapi
+uvicorn
+pandas
+sqlalchemy
+psycopg2-binary
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
+```
+
+### 3.2. Frontend (Vite + React)
+
+> ⚠️ The frontend has been migrated from Next.js to **Vite + React SPA** for long-term stability.
+
+```powershell
+cd frontend
+npm install
+```
+
+**Tech Stack:**
+- **Vite 6** — Fast, stable build tool
+- **React 18** + **TypeScript**
+- **React Router v7** — Client-side routing
+- **Tailwind CSS v3** — Styling (via PostCSS)
+- **Radix UI** — Accessible UI primitives
+- **Recharts** — Data visualization
+- **Framer Motion** — Animations
+
+### 3.3. Database (PostgreSQL)
+
+```sql
+CREATE DATABASE dataintellect;
+```
+
+**Connection details:**
+- Host: `localhost` | Port: `5432`
+- User: `postgres`
+- Database: `dataintellect`
+
+---
+
+## 4. Daily Development (Quick Start)
+
+Run in **separate terminals**, in this order:
+
+### Terminal 1 — Backend
+```powershell
+# From: dataintellect/backend
+& "venv\Scripts\python.exe" -m uvicorn app.main:app --reload
+```
+- API: `http://127.0.0.1:8000`
+- Swagger Docs: `http://127.0.0.1:8000/docs`
+
+### Terminal 2 — Frontend
+```powershell
+# From: dataintellect/frontend
+npm run dev
+```
+- App: `http://localhost:5173`
+
+---
+
+## 5. Useful Commands
+
+| Task | Command | Directory |
+| :--- | :--- | :--- |
+| Run backend tests | `& "venv\Scripts\python.exe" run_tests.py` | `backend/` |
+| Reset DB schema | `& "venv\Scripts\python.exe" fix_schema.py` | `backend/` |
+| Build frontend | `npm run build` | `frontend/` |
+| Type-check frontend | `npx tsc --noEmit` | `frontend/` |
+
+---
+
+## 6. Project Structure
+
+```
+dataintellect/
+├── backend/            # FastAPI + SQLAlchemy
+│   └── app/
+│       ├── main.py
+│       ├── models.py
+│       ├── schemas.py
+│       ├── auth.py
+│       └── routers/
+│           ├── auth.py
+│           └── upload.py
+├── frontend/           # Vite + React SPA (active)
+│   └── src/
+│       ├── App.tsx         # Router + layout
+│       ├── pages/          # Page components
+│       ├── components/     # Reusable UI
+│       └── hooks/          # Custom hooks
+├── frontend-nextjs-backup/ # Original Next.js (archived)
+├── ml/                 # ML models
+├── rag/                # RAG pipeline (future)
+└── data-engineering/   # Data pipeline scripts
+```
+
+---
+
+**Status**: Phase 1 (Minor Project) — Frontend migrated to Vite React. Core features in progress.
